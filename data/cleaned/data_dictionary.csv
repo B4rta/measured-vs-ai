@@ -1,0 +1,24 @@
+column,dtype,unit,meaning
+project,string,-,Site/project identifier (for grouping only)
+cpt_id,string,-,Sounding identifier (for grouping only)
+geo_age,category,-,Geological age (categorical)
+test_method,category,-,Measurement method (diagnostics only; DO NOT use as feature at inference)
+z_top_m,float,m,Top of layer
+z_bot_m,float,m,Bottom of layer
+z_mid_m,float,m,Mid depth
+gwl_m,float,m,Groundwater level
+qc_mpa,float,MPa,Cone tip resistance
+fs_mpa,float,MPa,Sleeve friction
+u2_mpa,float,MPa,Pore pressure u2
+rf_pct,float,%,Friction ratio
+qt_mpa,float,MPa,Corrected cone resistance (qt = qc + 0.3*u2)
+gamma_sat_kn_m3,float,kN/m3,Saturated unit weight (CPT-only; Mayne&Bouweester-style)
+gamma_unsat_kn_m3,float,kN/m3,Unsat unit weight (approx gamma_sat-1)
+sigma_v_kpa,float,kPa,Total vertical stress (computed CPT-only)
+u0_kpa,float,kPa,Hydrostatic pore pressure
+sigma_eff_kpa,float,kPa,Effective vertical stress
+bq,float,-,Pore pressure parameter Bq (optional)
+vs_meas_mps,float,m/s,Measured Vs (target)
+log_vs_meas,float,ln(m/s),Log target
+group_project,string,-,Group ID for leave-one-site-out CV
+group_cpt,string,-,Group ID for leave-one-CPT-out CV

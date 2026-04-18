@@ -1,0 +1,68 @@
+experiment_name: specialist_profile_ensemble_v4_reproduction
+
+data:
+  cleaned_dir: data/cleaned
+  prefer_parquet: true
+
+splits:
+  mode: group_kfold
+  group_column: group_project
+  n_splits: 5
+  random_state: 42
+
+features:
+  include_test_method_for_trees: true
+  include_profile_features: true
+  profile_windows: [3, 5]
+
+models:
+  final_model: specialist_weighted_stack
+
+baseline:
+  alpha: 0.0001
+  max_iter: 8000
+
+forest:
+  n_estimators_rf: 500
+  n_estimators_et: 700
+  max_features: sqrt
+  min_samples_leaf_rf: 2
+  min_samples_leaf_et: 2
+  random_state: 42
+
+weights:
+  enable: true
+  high_vs_anchor_mps: 320.0
+  high_vs_span_mps: 180.0
+  high_vs_boost: 0.5
+  tertiary_boost: 0.2
+  scpt_boost: 0.3
+
+stack:
+  base_weight_step: 0.05
+
+specialists:
+  enable_tertiary: true
+  enable_scpt: true
+  enable_high_vs: true
+  min_train_rows_tertiary: 60
+  min_train_rows_scpt: 40
+  min_train_rows_high_vs: 80
+  tertiary_model_type: rf
+  scpt_model_type: rf
+  high_model_type: et
+  tertiary_n_estimators: 350
+  scpt_n_estimators: 400
+  high_n_estimators: 500
+  tertiary_min_samples_leaf: 2
+  scpt_min_samples_leaf: 1
+  high_min_samples_leaf: 1
+  high_vs_threshold_mps: 350.0
+  blend_weight_step: 0.05
+  max_blend_weight: 0.8
+
+outputs:
+  root_dir: outputs
+
+inference:
+  produce_unlabeled_predictions: true

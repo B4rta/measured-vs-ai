@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Train default",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/run_train.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Train smoke",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/run_train_smoke.py",
+      "console": "integratedTerminal"
+    }
+  ]
+}
