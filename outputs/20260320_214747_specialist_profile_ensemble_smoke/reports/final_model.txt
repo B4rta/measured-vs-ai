@@ -1,0 +1,3 @@
+specialist_weighted_stack
+base_weights={'empirical': 0.2, 'rf': 0.8, 'et': 0.0}
+specialist_weights={'tertiary': 0.1, 'scpt': 0.2, 'high_vs': 0.5}
