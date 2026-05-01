@@ -1,6 +1,6 @@
 # measured-vs-ai
 
-Final CPT → measured Vs modelling repository for the Budapest CPT--Vs paper.
+Final CPT-to-measured Vs modelling repository for the Budapest CPT--Vs paper.
 
 The core model is a **profile-aware specialist ensemble** evaluated with grouped site-level validation. This version also contains paper-extension analyses requested during internal review: conformal prediction intervals, SHAP explainability, boosting benchmarks, hyperparameter sensitivity runs, and depth-profile figures.
 
@@ -8,8 +8,8 @@ The core model is a **profile-aware specialist ensemble** evaluated with grouped
 
 Fixed reference metrics from the current best run are stored in `docs/results_snapshot/`.
 
-- **specialist_weighted_stack**: RMSE **59.32**, MAE **42.15**, R² **0.619**, bias **-3.36**
-- **empirical_baseline**: RMSE **64.98**, MAE **46.53**, R² **0.543**, bias **-16.50**
+- **specialist_weighted_stack**: RMSE **59.32**, MAE **42.15**, R2 **0.619**, bias **-3.36**
+- **empirical_baseline**: RMSE **64.98**, MAE **46.53**, R2 **0.543**, bias **-16.50**
 
 The result should be described carefully: the specialist ensemble improves over the empirical baseline under the same grouped validation protocol, especially for SCPT and high-Vs cases. It is not uniformly better in every subset.
 
@@ -25,19 +25,19 @@ The manuscript text and submitted DOCX/PDF files are intentionally not included 
 
 ## Repository structure
 
-- `data/cleaned/` — cleaned labeled/unlabeled modelling tables
-- `src/measured_vs/` — core package
-- `configs/default.yaml` — recommended final config
-- `configs/paper_reproduction_v4_best.yaml` — configuration matching the best recorded v4 run family
-- `configs/deployable.yaml` — variant without `test_method`
-- `configs/cv10.yaml` — 10-fold grouped-CV robustness config
-- `configs/lopo15.yaml` — leave-one-project-out-like 15-fold robustness config
-- `docs/results_snapshot/` — fixed metrics from the current manuscript snapshot
-- `scripts/make_paper_figures.py` — publication figure generator
-- `run_postprocess.py` — conformal prediction intervals from OOF predictions
-- `run_shap.py` — SHAP plots from trained RF/ET models
-- `run_benchmark_boosting.py` — HistGradientBoosting/XGBoost/LightGBM grouped-CV benchmark
-- `run_sensitivity.py` — retraining-based sensitivity grid for selected hyperparameters
+- `data/cleaned/` - cleaned labeled/unlabeled modelling tables
+- `src/measured_vs/` - core package
+- `configs/default.yaml` - recommended final config
+- `configs/paper_reproduction_v4_best.yaml` - configuration matching the best recorded v4 run family
+- `configs/deployable.yaml` - variant without `test_method`
+- `configs/cv10.yaml` - 10-fold grouped-CV robustness config
+- `configs/lopo15.yaml` - leave-one-project-out-like 15-fold robustness config
+- `docs/results_snapshot/` - fixed metrics from the current manuscript snapshot
+- `scripts/make_paper_figures.py` - publication figure generator
+- `run_postprocess.py` - conformal prediction intervals from OOF predictions
+- `run_shap.py` - SHAP plots from trained RF/ET models
+- `run_benchmark_boosting.py` - HistGradientBoosting/XGBoost/LightGBM grouped-CV benchmark
+- `run_sensitivity.py` - retraining-based sensitivity grid for selected hyperparameters
 
 ## Install
 
