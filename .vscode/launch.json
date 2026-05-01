@@ -2,18 +2,35 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Train default",
+      "name": "Run full paper pipeline",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/run_all.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Run smoke pipeline quickly",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/run_all.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "args": [
+        "--config", "configs/smoke.yaml",
+        "--skip-shap",
+        "--skip-benchmark",
+        "--skip-sensitivity"
+      ]
+    },
+    {
+      "name": "Train only",
       "type": "python",
       "request": "launch",
       "program": "${workspaceFolder}/run_train.py",
-      "console": "integratedTerminal"
-    },
-    {
-      "name": "Train smoke",
-      "type": "python",
-      "request": "launch",
-      "program": "${workspaceFolder}/run_train_smoke.py",
-      "console": "integratedTerminal"
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "args": ["--config", "configs/default.yaml"]
     }
   ]
 }

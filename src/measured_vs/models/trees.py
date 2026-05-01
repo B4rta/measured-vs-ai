@@ -35,6 +35,13 @@ class TreeProfileModel:
             return self.imputer_.fit_transform(work)
         return self.imputer_.transform(work)
 
+    def transform_features(self, X: pd.DataFrame) -> np.ndarray:
+        """Public feature transform for SHAP and diagnostics."""
+        return self._transform(X, fit=False)
+
+    def encoded_feature_names(self) -> list[str]:
+        return list(self.feature_columns)
+
     def _build_model(self):
         if self.model_type == "rf":
             return RandomForestRegressor(
@@ -68,6 +75,19 @@ class TreeProfileModel:
 
     def predict_vs(self, X: pd.DataFrame) -> np.ndarray:
         return np.exp(self.predict_log_vs(X))
+
+    def predict_log_tree_distribution(self, X: pd.DataFrame) -> np.ndarray:
+        """Per-tree log(Vs) predictions for diagnostic uncertainty plots.
+
+        This is not a calibrated prediction interval by itself. Use it as an
+        ensemble-spread diagnostic, and prefer conformal intervals for coverage.
+        """
+        if self.model_ is None:
+            raise RuntimeError("Tree model not fitted.")
+        if not hasattr(self.model_, "estimators_"):
+            raise RuntimeError("Underlying model does not expose estimators_.")
+        Xt = self._transform(X, fit=False)
+        return np.vstack([est.predict(Xt) for est in self.model_.estimators_])
 
     def feature_importance(self) -> pd.DataFrame:
         if self.model_ is None:

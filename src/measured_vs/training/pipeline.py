@@ -14,6 +14,7 @@ from measured_vs.utils.config import load_config
 from measured_vs.data.io import load_cleaned_data
 from measured_vs.data.features import engineer_profile_features, tree_feature_columns, compute_sample_weights
 from measured_vs.evaluation.metrics import regression_metrics_vs
+from measured_vs.evaluation.conformal import add_absolute_conformal_intervals, conformal_subset_summary
 from measured_vs.models.baseline import EmpiricalBaselineModel
 from measured_vs.models.trees import TreeProfileModel
 from measured_vs.models.specialist_stack import SpecialistWeightedStackModel
@@ -186,7 +187,11 @@ def run_training(config_path: str | Path = "configs/default.yaml"):
         include_test_method_for_trees=bool(config["features"]["include_test_method_for_trees"]),
     )
 
-    oof = labeled[["project", "cpt_id", "group_project", "group_cpt", "geo_age", "test_method", "vs_meas_mps"]].copy()
+    oof_cols = ["project", "cpt_id", "group_project", "group_cpt", "geo_age", "test_method", "vs_meas_mps"]
+    for optional_col in ["z_mid_m", "z_top_m", "z_bot_m", "qc_mpa", "qt_mpa", "fs_mpa", "sigma_eff_kpa"]:
+        if optional_col in labeled.columns and optional_col not in oof_cols:
+            oof_cols.append(optional_col)
+    oof = labeled[oof_cols].copy()
     for col in [
         "pred_log_empirical", "pred_log_rf", "pred_log_et", "pred_log_base_stack",
         "pred_log_tertiary_specialist", "pred_log_scpt_specialist", "pred_log_high_vs_specialist",
@@ -323,6 +328,22 @@ def run_training(config_path: str | Path = "configs/default.yaml"):
         max_weight=float(config["specialists"]["max_blend_weight"]),
     )
     oof["pred_log_specialist_weighted_stack"] = _apply_specialist_blend(oof, specialist_weights)
+    oof["pred_vs_mps_final"] = np.exp(oof["pred_log_specialist_weighted_stack"].to_numpy())
+
+    uncertainty_config = config.get("uncertainty", {})
+    conformal_summary_df = pd.DataFrame()
+    conformal_subset_df = pd.DataFrame()
+    if bool(uncertainty_config.get("enable_conformal", True)):
+        alphas = uncertainty_config.get("conformal_alphas", [0.10, 0.20])
+        oof, conformal_summary_df = add_absolute_conformal_intervals(
+            oof,
+            y_true_col="vs_meas_mps",
+            y_pred_col="pred_vs_mps_final",
+            alphas=alphas,
+            prefix="pred_vs_mps_final",
+        )
+        nominal_pct = 90 if "pred_vs_mps_final_lower_90" in oof.columns else int(round((1.0 - float(alphas[0])) * 100))
+        conformal_subset_df = conformal_subset_summary(oof, nominal_pct=nominal_pct)
 
     for name, col in [("base_weighted_stack", "pred_log_base_stack"), ("specialist_weighted_stack", "pred_log_specialist_weighted_stack")]:
         metrics = regression_metrics_vs(oof["vs_meas_mps"].to_numpy(), np.exp(oof[col].to_numpy()))
@@ -464,6 +485,10 @@ def run_training(config_path: str | Path = "configs/default.yaml"):
     pd.DataFrame(fold_rows).to_csv(run_dir / "reports" / "fold_metrics.csv", index=False)
     summary_df.to_csv(run_dir / "reports" / "summary_metrics.csv", index=False)
     subset_metrics_df.to_csv(run_dir / "reports" / "subset_metrics.csv", index=False)
+    if not conformal_summary_df.empty:
+        conformal_summary_df.to_csv(run_dir / "reports" / "conformal_intervals.csv", index=False)
+    if not conformal_subset_df.empty:
+        conformal_subset_df.to_csv(run_dir / "reports" / "conformal_subset_coverage.csv", index=False)
     (run_dir / "reports" / "base_weights.json").write_text(json.dumps(base_weights, indent=2), encoding="utf-8")
     (run_dir / "reports" / "specialist_weights.json").write_text(json.dumps(specialist_weights, indent=2), encoding="utf-8")
     (run_dir / "reports" / "final_model.txt").write_text(

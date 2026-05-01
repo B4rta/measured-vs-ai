@@ -1,0 +1,8 @@
+{
+  "config": "configs\\default.yaml",
+  "models": [
+    "hist_gradient_boosting",
+    "xgboost",
+    "lightgbm"
+  ]
+}

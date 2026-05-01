@@ -1,0 +1,6 @@
+# Optional dependencies for paper extension analyses.
+# Install these after requirements.txt if you want SHAP and external boosting benchmarks.
+shap>=0.44
+xgboost>=2.0
+lightgbm>=4.0
+matplotlib>=3.7

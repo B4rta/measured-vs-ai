@@ -66,3 +66,7 @@ outputs:
 
 inference:
   produce_unlabeled_predictions: false
+
+uncertainty:
+  enable_conformal: true
+  conformal_alphas: [0.10, 0.20]

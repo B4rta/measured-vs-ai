@@ -1,3 +1,14 @@
 __pycache__/
-*.pyc
-.venv/
+*.py[cod]
+.ipynb_checkpoints/
+outputs/*
+!outputs/.gitkeep
+outputs.zip
+paper_figures/
+*.tmp
+*.log
+*.docx
+.DS_Store
+
+# Full pipeline logs
+pipeline_logs/

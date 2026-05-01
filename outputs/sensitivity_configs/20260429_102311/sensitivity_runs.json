@@ -1,0 +1,47 @@
+[
+  {
+    "threshold": 325,
+    "max_blend_weight": 0.5,
+    "run_dir": "outputs\\20260429_102318_sensitivity_thr325_maxblend0p5"
+  },
+  {
+    "threshold": 325,
+    "max_blend_weight": 0.65,
+    "run_dir": "outputs\\20260429_102329_sensitivity_thr325_maxblend0p65"
+  },
+  {
+    "threshold": 325,
+    "max_blend_weight": 0.8,
+    "run_dir": "outputs\\20260429_102343_sensitivity_thr325_maxblend0p8"
+  },
+  {
+    "threshold": 350,
+    "max_blend_weight": 0.5,
+    "run_dir": "outputs\\20260429_102352_sensitivity_thr350_maxblend0p5"
+  },
+  {
+    "threshold": 350,
+    "max_blend_weight": 0.65,
+    "run_dir": "outputs\\20260429_102404_sensitivity_thr350_maxblend0p65"
+  },
+  {
+    "threshold": 350,
+    "max_blend_weight": 0.8,
+    "run_dir": "outputs\\20260429_102418_sensitivity_thr350_maxblend0p8"
+  },
+  {
+    "threshold": 375,
+    "max_blend_weight": 0.5,
+    "run_dir": "outputs\\20260429_102428_sensitivity_thr375_maxblend0p5"
+  },
+  {
+    "threshold": 375,
+    "max_blend_weight": 0.65,
+    "run_dir": "outputs\\20260429_102439_sensitivity_thr375_maxblend0p65"
+  },
+  {
+    "threshold": 375,
+    "max_blend_weight": 0.8,
+    "run_dir": "outputs\\20260429_102453_sensitivity_thr375_maxblend0p8"
+  }
+]
