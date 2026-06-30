@@ -1,0 +1,4 @@
+unit,count,interpretation
+depth_interval_records,1304,Model rows; not statistically independent observations.
+cpt_soundings,80,Nested vertical profiles used for profile-aware features.
+projects_sites,15,Independent validation groups for project-level splitting.
