@@ -2,7 +2,9 @@
 
 Final CPT-to-measured Vs modelling repository for the Budapest CPT--Vs paper.
 
-The core model is a **profile-aware specialist ensemble** evaluated with grouped site-level validation. This version also contains paper-extension analyses requested during internal review: conformal prediction intervals, SHAP explainability, boosting benchmarks, hyperparameter sensitivity runs, and depth-profile figures.
+The core model is a **profile-aware specialist ensemble** evaluated with grouped site-level validation. This version also contains paper-extension analyses requested during internal review: conformal prediction intervals, SHAP explainability, boosting benchmarks, hyperparameter sensitivity runs, depth-profile figures, and validation-design audit tables.
+
+The labelled data contain **1,304 depth-interval rows**, but these rows are nested inside **80 CPT/CPTu soundings** from **15 Budapest projects**. Treat the row count as the modelling table size, not as 1,304 independent observations.
 
 ## Core result snapshot
 
@@ -12,6 +14,23 @@ Fixed reference metrics from the current best run are stored in `docs/results_sn
 - **empirical_baseline**: RMSE **64.98**, MAE **46.53**, R2 **0.543**, bias **-16.50**
 
 The result should be described carefully: the specialist ensemble improves over the empirical baseline under the same grouped validation protocol, especially for SCPT and high-Vs cases. It is not uniformly better in every subset.
+
+## Validation-design audit
+
+Reviewer-facing audit tables are stored in `docs/results_snapshot/`:
+
+- `data_hierarchy.csv` - interval rows, soundings, and project/site groups
+- `project_composition.csv` - row/profile counts and subset composition by project
+- `fold_composition_5fold.csv` - grouped five-fold validation composition
+- `fold_composition_15fold.csv` - leave-one-project-like grouped composition
+
+Regenerate them with:
+
+```bash
+python scripts/audit_validation_design.py
+```
+
+The five-fold grouped split reduces leakage by keeping each project in one fold, but it is not perfectly balanced because the 15 projects have very different sizes. This limitation should be stated alongside the manuscript results.
 
 ## Code and data availability
 
@@ -33,6 +52,8 @@ The manuscript text and submitted DOCX/PDF files are intentionally not included 
 - `configs/cv10.yaml` - 10-fold grouped-CV robustness config
 - `configs/lopo15.yaml` - leave-one-project-out-like 15-fold robustness config
 - `docs/results_snapshot/` - fixed metrics from the current manuscript snapshot
+- `docs/reviewer_response_map.md` - concise map from reviewer concerns to manuscript/repository evidence
+- `scripts/audit_validation_design.py` - dataset hierarchy and grouped-CV audit table generator
 - `scripts/make_paper_figures.py` - publication figure generator
 - `run_postprocess.py` - conformal prediction intervals from OOF predictions
 - `run_shap.py` - SHAP plots from trained RF/ET models
