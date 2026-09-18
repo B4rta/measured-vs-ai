@@ -85,6 +85,8 @@ def tree_feature_columns(df: pd.DataFrame, include_test_method_for_trees: bool =
     excluded = {
         "project", "cpt_id", "vs_meas_mps", "log_vs_meas", "group_project", "group_cpt",
     }
+    if not include_test_method_for_trees:
+        excluded.update({"test_method", "age_method"})
     feature_cols = [c for c in df.columns if c not in excluded]
     return feature_cols, cat_cols
 

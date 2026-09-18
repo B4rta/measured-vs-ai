@@ -1,0 +1,252 @@
+[
+  {
+    "fold": 1,
+    "training_projects": [
+      "Bacso",
+      "Budapart",
+      "Marina"
+    ],
+    "calibration_projects": [
+      "Balazs Bela u",
+      "Dunaterasz",
+      "D\u00e9vai 14",
+      "Galeria",
+      "H6-H7",
+      "Hungaria krt",
+      "Paskal",
+      "River",
+      "T\u00f6m\u0151 u. 23"
+    ],
+    "test_projects": [
+      "Futo u",
+      "Lang",
+      "Puskas"
+    ],
+    "calibration_scores": {
+      "Balazs Bela u": 86.1156877459037,
+      "Dunaterasz": 122.7578206425793,
+      "D\u00e9vai 14": 233.18827724234075,
+      "Galeria": 290.35785728568993,
+      "H6-H7": 88.02445802759561,
+      "Hungaria krt": 331.64566139208955,
+      "Paskal": 64.35887908187576,
+      "River": 297.05733650425293,
+      "T\u00f6m\u0151 u. 23": 112.40211385274952
+    },
+    "selection": {
+      "base_weights": [
+        0.25,
+        0.1,
+        0.65
+      ],
+      "threshold": 325.0,
+      "cap": 0.5,
+      "inner_rmse": 67.2374344409453,
+      "specialist_weights": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  {
+    "fold": 2,
+    "training_projects": [
+      "Futo u",
+      "Lang",
+      "Puskas"
+    ],
+    "calibration_projects": [
+      "Bacso",
+      "Balazs Bela u",
+      "Budapart",
+      "Dunaterasz",
+      "Galeria",
+      "Marina",
+      "Paskal",
+      "River",
+      "T\u00f6m\u0151 u. 23"
+    ],
+    "test_projects": [
+      "D\u00e9vai 14",
+      "H6-H7",
+      "Hungaria krt"
+    ],
+    "calibration_scores": {
+      "Bacso": 160.29791400264838,
+      "Balazs Bela u": 77.58577903219364,
+      "Budapart": 245.02242396306514,
+      "Dunaterasz": 127.05061464810507,
+      "Galeria": 284.4683794081609,
+      "Marina": 45.81985348788322,
+      "Paskal": 74.2390529141102,
+      "River": 421.70258008757776,
+      "T\u00f6m\u0151 u. 23": 120.43262906363316
+    },
+    "selection": {
+      "base_weights": [
+        0.65,
+        0.35,
+        0.0
+      ],
+      "threshold": 325.0,
+      "cap": 0.5,
+      "inner_rmse": 72.26590629188702,
+      "specialist_weights": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  {
+    "fold": 3,
+    "training_projects": [
+      "Futo u",
+      "Galeria",
+      "T\u00f6m\u0151 u. 23"
+    ],
+    "calibration_projects": [
+      "Bacso",
+      "Balazs Bela u",
+      "Dunaterasz",
+      "D\u00e9vai 14",
+      "H6-H7",
+      "Hungaria krt",
+      "Lang",
+      "Puskas",
+      "River"
+    ],
+    "test_projects": [
+      "Budapart",
+      "Marina",
+      "Paskal"
+    ],
+    "calibration_scores": {
+      "Bacso": 156.20008458937082,
+      "Balazs Bela u": 51.382909118743726,
+      "Dunaterasz": 133.1828167875513,
+      "D\u00e9vai 14": 277.64848858821466,
+      "H6-H7": 140.6929887594561,
+      "Hungaria krt": 267.24985104627393,
+      "Lang": 82.068895500314,
+      "Puskas": 230.84971121555833,
+      "River": 418.18996584714597
+    },
+    "selection": {
+      "base_weights": [
+        0.4,
+        0.25,
+        0.35
+      ],
+      "threshold": 325.0,
+      "cap": 0.8,
+      "inner_rmse": 59.85975594741029,
+      "specialist_weights": [
+        0.8,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  {
+    "fold": 4,
+    "training_projects": [
+      "D\u00e9vai 14",
+      "Futo u",
+      "Lang"
+    ],
+    "calibration_projects": [
+      "Bacso",
+      "Budapart",
+      "Dunaterasz",
+      "H6-H7",
+      "Hungaria krt",
+      "Marina",
+      "Paskal",
+      "Puskas",
+      "River"
+    ],
+    "test_projects": [
+      "Balazs Bela u",
+      "Galeria",
+      "T\u00f6m\u0151 u. 23"
+    ],
+    "calibration_scores": {
+      "Bacso": 161.25588811645662,
+      "Budapart": 271.42713542881506,
+      "Dunaterasz": 141.93356225832576,
+      "H6-H7": 139.37933885713102,
+      "Hungaria krt": 256.4771720190982,
+      "Marina": 132.5666179044337,
+      "Paskal": 83.96255516880066,
+      "Puskas": 181.83034270072773,
+      "River": 274.9300356105621
+    },
+    "selection": {
+      "base_weights": [
+        0.0,
+        0.65,
+        0.35
+      ],
+      "threshold": 325.0,
+      "cap": 0.8,
+      "inner_rmse": 85.62942274675568,
+      "specialist_weights": [
+        0.8,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  {
+    "fold": 5,
+    "training_projects": [
+      "D\u00e9vai 14",
+      "Lang",
+      "Marina"
+    ],
+    "calibration_projects": [
+      "Balazs Bela u",
+      "Budapart",
+      "Futo u",
+      "Galeria",
+      "H6-H7",
+      "Hungaria krt",
+      "Paskal",
+      "Puskas",
+      "T\u00f6m\u0151 u. 23"
+    ],
+    "test_projects": [
+      "Bacso",
+      "Dunaterasz",
+      "River"
+    ],
+    "calibration_scores": {
+      "Balazs Bela u": 72.50654008818563,
+      "Budapart": 277.48585396800286,
+      "Futo u": 145.35357068457438,
+      "Galeria": 279.37262711826685,
+      "H6-H7": 104.54891568573049,
+      "Hungaria krt": 315.2081284083516,
+      "Paskal": 79.66858393912585,
+      "Puskas": 208.5924031809131,
+      "T\u00f6m\u0151 u. 23": 158.7864728519953
+    },
+    "selection": {
+      "base_weights": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "threshold": 325.0,
+      "cap": 0.5,
+      "inner_rmse": 82.34540447987649,
+      "specialist_weights": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  }
+]

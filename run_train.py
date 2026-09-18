@@ -7,6 +7,7 @@ from measured_vs.training.pipeline import run_training
 
 
 if __name__ == "__main__":
+    print("Historical workflow: pooled stack and conformal scores are not independent validation. Use run_nested_validation.py for the revised analysis.")
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="configs/default.yaml")
     args = parser.parse_args()

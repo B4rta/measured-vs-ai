@@ -1,0 +1,40 @@
+{
+  "paired_mean_delta_rmse": -0.04104215037618791,
+  "paired_median_delta_rmse": -0.7782461597614159,
+  "projects_improved": 8,
+  "paired_bootstrap_95": [
+    -2.863688701351492,
+    2.7386716857837228
+  ],
+  "influence_delta_range": [
+    -2.3995586836735896,
+    0.37483756740586216
+  ],
+  "calibration": [
+    {
+      "model": "empirical",
+      "calibration_slope": 1.0995006009432824,
+      "calibration_intercept_mps": -13.277123918039308
+    },
+    {
+      "model": "rf",
+      "calibration_slope": 0.9335709307384912,
+      "calibration_intercept_mps": 21.818013151096498
+    },
+    {
+      "model": "et",
+      "calibration_slope": 0.9869681962557022,
+      "calibration_intercept_mps": 8.875274523346816
+    },
+    {
+      "model": "base_stack",
+      "calibration_slope": 1.048392350134839,
+      "calibration_intercept_mps": -4.197643550852539
+    },
+    {
+      "model": "specialist_stack",
+      "calibration_slope": 1.0313501961108702,
+      "calibration_intercept_mps": -0.5047203538946011
+    }
+  ]
+}

@@ -1,0 +1,177 @@
+[
+  {
+    "fold": 1,
+    "train_projects": [
+      "Bacso",
+      "Balazs Bela u",
+      "Budapart",
+      "Dunaterasz",
+      "D\u00e9vai 14",
+      "Futo u",
+      "Galeria",
+      "H6-H7",
+      "Hungaria krt",
+      "Lang",
+      "Marina",
+      "Paskal",
+      "River",
+      "T\u00f6m\u0151 u. 23"
+    ],
+    "test_projects": [
+      "Puskas"
+    ],
+    "base_weights": [
+      0.55,
+      0.15,
+      0.3
+    ],
+    "threshold": 350.0,
+    "cap": 0.65,
+    "inner_rmse": 60.8703076239774,
+    "specialist_weights": [
+      0.05,
+      0.65,
+      0.5
+    ]
+  },
+  {
+    "fold": 2,
+    "train_projects": [
+      "Balazs Bela u",
+      "Dunaterasz",
+      "Futo u",
+      "Galeria",
+      "H6-H7",
+      "Hungaria krt",
+      "Lang",
+      "Marina",
+      "Paskal",
+      "Puskas",
+      "River",
+      "T\u00f6m\u0151 u. 23"
+    ],
+    "test_projects": [
+      "Bacso",
+      "Budapart",
+      "D\u00e9vai 14"
+    ],
+    "base_weights": [
+      0.1,
+      0.0,
+      0.9
+    ],
+    "threshold": 350.0,
+    "cap": 0.8,
+    "inner_rmse": 57.22223205119152,
+    "specialist_weights": [
+      0.55,
+      0.8,
+      0.8
+    ]
+  },
+  {
+    "fold": 3,
+    "train_projects": [
+      "Bacso",
+      "Balazs Bela u",
+      "Budapart",
+      "Dunaterasz",
+      "D\u00e9vai 14",
+      "Galeria",
+      "H6-H7",
+      "Hungaria krt",
+      "Paskal",
+      "Puskas",
+      "River",
+      "T\u00f6m\u0151 u. 23"
+    ],
+    "test_projects": [
+      "Futo u",
+      "Lang",
+      "Marina"
+    ],
+    "base_weights": [
+      0.4,
+      0.3,
+      0.3
+    ],
+    "threshold": 375.0,
+    "cap": 0.65,
+    "inner_rmse": 56.7158761633955,
+    "specialist_weights": [
+      0.0,
+      0.55,
+      0.5
+    ]
+  },
+  {
+    "fold": 4,
+    "train_projects": [
+      "Bacso",
+      "Budapart",
+      "Dunaterasz",
+      "D\u00e9vai 14",
+      "Futo u",
+      "H6-H7",
+      "Hungaria krt",
+      "Lang",
+      "Marina",
+      "Paskal",
+      "Puskas"
+    ],
+    "test_projects": [
+      "Balazs Bela u",
+      "Galeria",
+      "River",
+      "T\u00f6m\u0151 u. 23"
+    ],
+    "base_weights": [
+      0.5,
+      0.5,
+      0.0
+    ],
+    "threshold": 350.0,
+    "cap": 0.8,
+    "inner_rmse": 55.58568007416019,
+    "specialist_weights": [
+      0.0,
+      0.8,
+      0.45
+    ]
+  },
+  {
+    "fold": 5,
+    "train_projects": [
+      "Bacso",
+      "Balazs Bela u",
+      "Budapart",
+      "D\u00e9vai 14",
+      "Futo u",
+      "Galeria",
+      "Lang",
+      "Marina",
+      "Puskas",
+      "River",
+      "T\u00f6m\u0151 u. 23"
+    ],
+    "test_projects": [
+      "Dunaterasz",
+      "H6-H7",
+      "Hungaria krt",
+      "Paskal"
+    ],
+    "base_weights": [
+      0.4,
+      0.6,
+      0.0
+    ],
+    "threshold": 325.0,
+    "cap": 0.5,
+    "inner_rmse": 67.55708221295237,
+    "specialist_weights": [
+      0.4,
+      0.1,
+      0.0
+    ]
+  }
+]

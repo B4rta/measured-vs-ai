@@ -1,0 +1,31 @@
+{
+  "source_file": "Full-database.xlsx",
+  "source_sha256": "d7d055efd8701ada48bb599d2be347513afa7d1c33adeb77409bdc0749359dba",
+  "worksheet": "CPT_SCPT_MASW",
+  "worksheet_extent_rows": 6057,
+  "actual_interval_records": 1304,
+  "retained_records": 1304,
+  "removed_records": 0,
+  "source_to_cleaned_checks": {
+    "project": true,
+    "cpt_id": true,
+    "z_top_m": true,
+    "z_bot_m": true,
+    "z_mid_m": true,
+    "gwl_m": true,
+    "geo_age": true,
+    "qc_mpa": true,
+    "fs_mpa": true,
+    "u2_mpa": true,
+    "rf_pct": true,
+    "vs_meas_mps": true,
+    "test_method": true,
+    "qt_mpa": true
+  },
+  "source_cpt_only_gamma_matches_reconstruction": true,
+  "original_field_reading_count": "not provided",
+  "outlier_removal": "none in this revision",
+  "source_matching": "15 m horizontal criterion and seismic-layer averaging documented in Mahler et al. 2026",
+  "source_formula": "11.46 + 0.33*log10(z_m) + 3.1*log10(fs_kPa) + 0.7*log10(qt_kPa)",
+  "stress_assumption": "homogeneous column using local CPT-only unit weight; not measured stress or cumulative layer integration"
+}

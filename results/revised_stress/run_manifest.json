@@ -1,0 +1,29 @@
+{
+  "arguments": {
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "trees": 300,
+    "output": "results/revised_stress",
+    "modalities": [
+      "deployable",
+      "retrospective"
+    ],
+    "conformal": false
+  },
+  "data_sha256": "159c912593aefacb8579f69444704f60aeeabe137a94dc679b15f9ea9033b5d9",
+  "python": "3.12.14",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1"
+  },
+  "rows": 1304,
+  "projects": 15,
+  "soundings": 80,
+  "duplicate_rows": 0,
+  "removed_rows": 0
+}

@@ -1,225 +1,77 @@
-# measured-vs-ai
+# CPT-based shear-wave velocity prediction in Budapest
 
-Final CPT-to-measured Vs modelling repository for the Budapest CPT--Vs paper.
+Code and data for a project-level study of shear-wave velocity prediction from cone penetration tests. The database contains 1,304 paired depth intervals from 80 soundings at 15 Budapest projects. The independent validation unit is the project.
 
-The core model is a **profile-aware specialist ensemble** evaluated with grouped site-level validation. This version also contains paper-extension analyses requested during internal review: conformal prediction intervals, SHAP explainability, boosting benchmarks, hyperparameter sensitivity runs, depth-profile figures, and validation-design audit tables.
+The September 2026 revision replaces the original pooled stacking scores with nested validation, checks the source workbook, and evaluates prediction intervals on separate projects. The primary configuration uses CPT variables, groundwater information and geological age. It excludes the seismic measurement label and SCPT routing.
 
-The labelled data contain **1,304 depth-interval rows**, but these rows are nested inside **80 CPT/CPTu soundings** from **15 Budapest projects**. Treat the row count as the modelling table size, not as 1,304 independent observations.
+## Results
 
-## Core result snapshot
+Five outer project folds, three inner project folds, seed 42:
 
-Fixed reference metrics from the current best run are stored in `docs/results_snapshot/`.
+| Model | RMSE (m/s) | MAE (m/s) | R² | Bias (m/s) |
+|---|---:|---:|---:|---:|
+| Robust regression baseline | 62.11 | 44.83 | 0.582 | −14.83 |
+| Random Forest | 63.29 | 45.25 | 0.566 | −2.22 |
+| Extra Trees | 62.47 | 44.55 | 0.578 | −5.07 |
+| Base stack | 61.34 | 44.12 | 0.593 | −9.72 |
+| Specialist stack without modality | 60.56 | 43.82 | 0.603 | −8.55 |
 
-- **specialist_weighted_stack**: RMSE **59.32**, MAE **42.15**, R2 **0.619**, bias **-3.36**
-- **empirical_baseline**: RMSE **64.98**, MAE **46.53**, R2 **0.543**, bias **-16.50**
+The pooled RMSE reduction is 2.50%. Equal weighting of projects gives mean RMSEs of 64.17 and 64.13 m/s for the baseline and specialist stack. The stack improves 8 of 15 projects; the paired mean difference is −0.04 m/s, with a descriptive project-bootstrap interval of −2.86 to 2.74 m/s. These results do not establish consistent superiority on new projects.
 
-The result should be described carefully: the specialist ensemble improves over the empirical baseline under the same grouped validation protocol, especially for SCPT and high-Vs cases. It is not uniformly better in every subset.
+Seeds 42, 43 and 44 give primary RMSEs of 60.563037, 60.520698 and 60.699858 m/s. This fixed-fold comparison measures forest randomness, not regional transfer uncertainty. A separate retrospective configuration includes the seismic label and SCPT routing; its seed-42 RMSE is 59.47 m/s and is not the engineering deployment claim.
 
-## Validation-design audit
+The former 59.32 m/s headline followed selection of blend weights on the same out-of-fold targets used for reporting. The former 90.18% and 80.14% coverages were calibration-set summaries. Historical outputs remain for traceability but are not independent validation results.
 
-Reviewer-facing audit tables are stored in `docs/results_snapshot/`:
+## Reproduce the revision
 
-- `data_hierarchy.csv` - interval rows, soundings, and project/site groups
-- `project_composition.csv` - row/profile counts and subset composition by project
-- `fold_composition_5fold.csv` - grouped five-fold validation composition
-- `fold_composition_15fold.csv` - leave-one-project-like grouped composition
-
-Regenerate them with:
-
-```bash
-python scripts/audit_validation_design.py
-```
-
-The five-fold grouped split reduces leakage by keeping each project in one fold, but it is not perfectly balanced because the 15 projects have very different sizes. This limitation should be stated alongside the manuscript results.
-
-## Code and data availability
-
-The code, cleaned modelling tables, configuration files, generated figures, trained-model artifacts, benchmark outputs, and reproducibility scripts supporting the paper are available in this public GitHub repository:
-
-https://github.com/B4rta/measured-vs-ai
-
-Large generated artifacts are stored with Git LFS. Install Git LFS before cloning if the full model and output files are required.
-
-The manuscript text and submitted DOCX/PDF files are intentionally not included in this repository.
-
-## Repository structure
-
-- `data/cleaned/` - cleaned labeled/unlabeled modelling tables
-- `src/measured_vs/` - core package
-- `configs/default.yaml` - recommended final config
-- `configs/paper_reproduction_v4_best.yaml` - configuration matching the best recorded v4 run family
-- `configs/deployable.yaml` - variant without `test_method`
-- `configs/cv10.yaml` - 10-fold grouped-CV robustness config
-- `configs/lopo15.yaml` - leave-one-project-out-like 15-fold robustness config
-- `docs/results_snapshot/` - fixed metrics from the current manuscript snapshot
-- `docs/reviewer_response_map.md` - concise map from reviewer concerns to manuscript/repository evidence
-- `scripts/audit_validation_design.py` - dataset hierarchy and grouped-CV audit table generator
-- `scripts/make_paper_figures.py` - publication figure generator
-- `run_postprocess.py` - conformal prediction intervals from OOF predictions
-- `run_shap.py` - SHAP plots from trained RF/ET models
-- `run_benchmark_boosting.py` - HistGradientBoosting/XGBoost/LightGBM grouped-CV benchmark
-- `run_sensitivity.py` - retraining-based sensitivity grid for selected hyperparameters
-
-## Install
-
-Core training environment:
+Use Python 3.12:
 
 ```bash
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
+python -m pip install -r requirements-revision.txt
+python -m unittest discover -s tests -v
+python run_nested_validation.py --seeds 42 43 44 --modalities deployable retrospective
+python run_project_intervals.py
+python scripts/summarize_revision.py
 ```
 
-Optional paper-extension tools:
+Results go to `results/revised_stress/`, `results/revised_intervals/` and `results/revision_summary/`. The optional source audit requires a local copy supplied by the database owner:
 
 ```bash
-python -m pip install -r requirements-extensions.txt
+python scripts/audit_source_workbook.py "/path/to/Data Table (Full FINAL).xlsx"
 ```
 
-If `xgboost` or `lightgbm` is not available for your local Python version, the benchmark script will skip the missing library and still run the scikit-learn `HistGradientBoostingRegressor` baseline.
+Audit summaries and the derived modelling table are already in `results/source_audit/`. The private workbook is not redistributed. The summary script uses this checked table for representative profiles.
 
-## Main training
+All reported model scores use untouched outer projects. Base weights, specialist weights, thresholds and caps are selected inside each outer training set. The full grid and selected weights are saved per fold; predictions carry original row IDs. Do not choose a preferred seed from these outputs.
 
-```bash
-python run_train.py --config configs/default.yaml
-```
+## Data and preprocessing
 
-Paper reproduction run:
+The archived CSV in `data/cleaned/` is unchanged. Revised entry points reconstruct CPT-only unit weights and stress proxies with `src/measured_vs/data/stress.py`. The source spreadsheet uses base-10 logarithms in its CPT-only unit-weight formula; the reconstruction matches that column for every record. The overburden proxy uses soil thickness above the interval, split at groundwater. It is a homogeneous-column approximation, not a measured stress profile.
 
-```bash
-python run_train.py --config configs/paper_reproduction_v4_best.yaml
-```
+The workbook's other density and stress formulas include measured Vs. Those columns are excluded. Vs, log(Vs), project IDs and sounding IDs are never predictors. Imputation, scaling and encoding are fitted within training partitions. Profile descriptors use only the same sounding's CPT data and require its completed interval profile.
 
-Robustness CV checks:
+The legacy `MASW` label denotes combined surface-wave methods. The published source describes 899 MASW and 261 tomography records, plus 144 SCPT records. The modelling table does not distinguish individual tomography rows. Revised figures call this category “surface-wave”.
 
-```bash
-python run_train.py --config configs/cv10.yaml
-python run_train.py --config configs/lopo15.yaml
-```
+## Prediction intervals
 
-Smoke test:
+The separate random-project experiment has 3 fitting, 9 calibration and 3 test projects per split. All selection uses fitting projects only. Maximum absolute residuals, one per calibration project, give ranks 8 and 9 for 80% and 90% simultaneous project coverage under project exchangeability.
 
-```bash
-python run_train_smoke.py
-```
+Held-out whole-project coverages are 12/15 and 15/15. Mean clipped interval widths are about 547 and 623 m/s. This small database cannot support both a large fitting set and precise project-level calibration. These bands use different models from the point-validation experiment and must not be attached to its predictions or to a full-data refit.
 
-## After training: paper extension analyses
+## Where to look
 
-Assume your run directory is `outputs/<RUN_NAME>`.
+- `run_nested_validation.py`: point validation and inner sensitivity grid.
+- `run_project_intervals.py`: separate calibration and assessment.
+- `results/revision_summary/`: paired project, subset, calibration and influence summaries.
+- `results/revised_stress/*/selection.json`: project allocation and selected weights.
+- `docs/revision_notes.md`: changes, assumptions and remaining source limitations.
+- `docs/figures/`: regenerated figures and attributed source map.
 
-### 1) Conformal prediction intervals
+The old `run_train.py`, `run_all.py`, `run_postprocess.py` and YAML configurations reproduce the exploratory workflow, not the revised validation protocol. Old serialized models use different preprocessing and must not be mixed with revised stress variables.
 
-```bash
-python run_postprocess.py --run-dir outputs/<RUN_NAME>
-```
+## Sources
 
-This creates:
+Mahler et al. (2026), *Regional Calibration of CPT Correlations for Shear Wave Velocity in Budapest Soils*, [doi:10.1007/s10706-026-03863-7](https://doi.org/10.1007/s10706-026-03863-7), describes the database. Related public data are on [Zenodo](https://doi.org/10.5281/zenodo.14970266). The manuscript cites a fixed Git commit. Submission documents are maintained separately.
 
-- `predictions/cv_predictions_with_conformal_intervals.csv`
-- `reports/conformal_intervals.csv`
-- `reports/conformal_subset_coverage.csv`
+The map reproduces Figure 1 of Mahler et al. under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); map data © OpenStreetMap contributors. JPEG conversion leaves the mapped content unchanged. Other revision figures are generated from observations and outer predictions.
 
-Use these for the uncertainty-quantification section. The implementation is model-agnostic and calibrated from grouped-CV OOF residuals.
-
-### 2) SHAP explainability
-
-```bash
-python run_shap.py --run-dir outputs/<RUN_NAME> --model rf
-python run_shap.py --run-dir outputs/<RUN_NAME> --model et
-```
-
-Outputs are written to:
-
-- `figures/shap/`
-
-Use the SHAP beeswarm/bar plots and 2--3 dependency plots in the feature interpretation section.
-
-### 3) Boosting benchmark
-
-```bash
-python run_benchmark_boosting.py --config configs/default.yaml
-```
-
-This runs a grouped-CV benchmark for:
-
-- scikit-learn HistGradientBoostingRegressor
-- XGBoost, if installed
-- LightGBM, if installed
-
-Outputs are written to a new `outputs/<timestamp>_boosting_benchmark/` folder.
-
-### 4) Hyperparameter sensitivity
-
-Start with a cheaper smoke sensitivity grid:
-
-```bash
-python run_sensitivity.py --config configs/smoke.yaml
-```
-
-For final paper numbers, run a smaller but full configuration grid, for example:
-
-```bash
-python run_sensitivity.py --config configs/default.yaml --thresholds 325 350 375 --high-blend-max 0.50 0.65 0.80
-```
-
-This retrains the model for each setting and writes a manifest under `outputs/sensitivity_configs/`.
-
-### 5) Paper figures and depth-profile plot
-
-```bash
-python scripts/make_paper_figures.py --run-dir outputs/<RUN_NAME>
-```
-
-This creates:
-
-- measured vs predicted scatter, split by geological age and seismic method
-- residual trend with IQR envelope
-- one depth-profile prediction figure
-
-If you want a specific CPT/profile:
-
-```bash
-python scripts/make_paper_figures.py --run-dir outputs/<RUN_NAME> --cpt-id <GROUP_CPT_ID>
-```
-
-## Manuscript support materials
-
-This repository contains the computational materials needed to support the paper, including conformal prediction interval outputs, SHAP figures, boosting benchmark results, sensitivity runs, and depth-profile figures. The manuscript itself is kept outside the repository.
-
-## One-file full pipeline for VS Code
-
-The easiest way to run the complete paper pipeline is now:
-
-```bash
-python run_all.py
-```
-
-This single file runs, in order:
-
-1. training with `configs/default.yaml`,
-2. conformal prediction postprocessing,
-3. paper figure generation,
-4. SHAP analysis for the random forest model,
-5. boosting benchmark,
-6. hyperparameter sensitivity analysis.
-
-For a quick test:
-
-```bash
-python run_all.py --config configs/smoke.yaml --skip-shap --skip-benchmark --skip-sensitivity
-```
-
-For using an already finished run without retraining:
-
-```bash
-python run_all.py --skip-train
-```
-
-or explicitly:
-
-```bash
-python run_all.py --run-dir outputs/<RUN_NAME>
-```
-
-Runtime logs are written locally to `pipeline_logs/`, which is ignored by Git.
-
-In VS Code, use the included launch configuration: **Run full paper pipeline**.
