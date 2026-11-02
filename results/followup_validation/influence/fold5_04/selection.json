@@ -1,0 +1,23 @@
+{
+  "fold": 5,
+  "deleted_training_project": "Futo u",
+  "test_projects": [
+    "Dunaterasz",
+    "H6-H7",
+    "Hungaria krt",
+    "Paskal"
+  ],
+  "base_weights": [
+    0.5,
+    0.5,
+    0.0
+  ],
+  "threshold": 325.0,
+  "cap": 0.5,
+  "inner_rmse": 70.40230317041078,
+  "specialist_weights": [
+    0.2,
+    0.0,
+    0.1
+  ]
+}

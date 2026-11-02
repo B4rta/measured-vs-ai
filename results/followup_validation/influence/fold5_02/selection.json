@@ -1,0 +1,23 @@
+{
+  "fold": 5,
+  "deleted_training_project": "Budapart",
+  "test_projects": [
+    "Dunaterasz",
+    "H6-H7",
+    "Hungaria krt",
+    "Paskal"
+  ],
+  "base_weights": [
+    0.3,
+    0.45,
+    0.25
+  ],
+  "threshold": 350.0,
+  "cap": 0.8,
+  "inner_rmse": 66.37610358222994,
+  "specialist_weights": [
+    0.25,
+    0.0,
+    0.8
+  ]
+}

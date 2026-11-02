@@ -1,0 +1,20 @@
+{
+  "fold": 1,
+  "deleted_training_project": "Dunaterasz",
+  "test_projects": [
+    "Puskas"
+  ],
+  "base_weights": [
+    0.0,
+    1.0,
+    0.0
+  ],
+  "threshold": 350.0,
+  "cap": 0.5,
+  "inner_rmse": 64.5856180531637,
+  "specialist_weights": [
+    0.0,
+    0.0,
+    0.15
+  ]
+}

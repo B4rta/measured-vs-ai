@@ -1,0 +1,22 @@
+{
+  "fold": 2,
+  "deleted_training_project": "Puskas",
+  "test_projects": [
+    "Bacso",
+    "Budapart",
+    "D\u00e9vai 14"
+  ],
+  "base_weights": [
+    0.5,
+    0.0,
+    0.5
+  ],
+  "threshold": 325.0,
+  "cap": 0.5,
+  "inner_rmse": 59.29746144630935,
+  "specialist_weights": [
+    0.0,
+    0.0,
+    0.0
+  ]
+}

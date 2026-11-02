@@ -1,0 +1,23 @@
+{
+  "fold": 5,
+  "deleted_training_project": "Balazs Bela u",
+  "test_projects": [
+    "Dunaterasz",
+    "H6-H7",
+    "Hungaria krt",
+    "Paskal"
+  ],
+  "base_weights": [
+    0.3,
+    0.1,
+    0.6
+  ],
+  "threshold": 375.0,
+  "cap": 0.8,
+  "inner_rmse": 65.70383800773357,
+  "specialist_weights": [
+    0.2,
+    0.0,
+    0.7
+  ]
+}

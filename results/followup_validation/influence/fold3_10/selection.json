@@ -1,0 +1,22 @@
+{
+  "fold": 3,
+  "deleted_training_project": "River",
+  "test_projects": [
+    "Futo u",
+    "Lang",
+    "Marina"
+  ],
+  "base_weights": [
+    0.55,
+    0.45,
+    0.0
+  ],
+  "threshold": 350.0,
+  "cap": 0.5,
+  "inner_rmse": 55.057908674715215,
+  "specialist_weights": [
+    0.0,
+    0.0,
+    0.15
+  ]
+}

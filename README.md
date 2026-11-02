@@ -6,6 +6,15 @@ The September 2026 revision replaces the original pooled stacking scores with ne
 
 ## November 2026 review
 
+The subsequent [follow-up validation](docs/followup_validation.md) adds 60
+fixed-test training-project deletion refits, five controlled profile perturbations
+and a frozen assessment of an age-free companion on 2,229 public seismic CPTu
+intervals from 50 soundings. Its external pooled RMSE is 112.58 m/s, compared
+with 60.93 m/s in its own Budapest validation; extreme regression extrapolations
+and source-support assumptions are disclosed. This does not validate transfer
+of the unchanged age-aware primary model. Original acquisition records,
+measured layer densities and engineering end-use validation remain unavailable.
+
 Additional stress, profile-window, component and leave-one-project-out checks, fixed published empirical comparators, routing diagnostics and descriptive coverage bounds are documented in [the second-review notes](docs/second_review.md). Run `python scripts/review_round2.py` and `python scripts/empirical_benchmarks.py`; outputs are in `results/review_round2/`. These analyses reuse the same projects and do not supply external validation. The fixed Robertson (2009) comparator gives mean-project/pooled RMSE of 62.05/58.35 m/s, lower than the stack on both endpoints. It uses the same CPT-only stress inputs, Pa = 100 kPa and documented two-pass SBTn normalization, without locally fitted coefficients. The September reference results below are unchanged.
 
 ## Results

@@ -1,0 +1,23 @@
+{
+  "fold": 4,
+  "deleted_training_project": "Hungaria krt",
+  "test_projects": [
+    "Balazs Bela u",
+    "Galeria",
+    "River",
+    "T\u00f6m\u0151 u. 23"
+  ],
+  "base_weights": [
+    0.3,
+    0.0,
+    0.7
+  ],
+  "threshold": 350.0,
+  "cap": 0.5,
+  "inner_rmse": 54.44353566132772,
+  "specialist_weights": [
+    0.0,
+    0.0,
+    0.4
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "fold": 3,
+  "deleted_training_project": "Bacso",
+  "test_projects": [
+    "Futo u",
+    "Lang",
+    "Marina"
+  ],
+  "base_weights": [
+    0.5,
+    0.5,
+    0.0
+  ],
+  "threshold": 375.0,
+  "cap": 0.5,
+  "inner_rmse": 57.53673449057528,
+  "specialist_weights": [
+    0.0,
+    0.0,
+    0.35
+  ]
+}

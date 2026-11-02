@@ -1,0 +1,27 @@
+{
+  "source": "https://doi.org/10.1016/j.dib.2020.106618",
+  "source_sha256": "4fb340af34321676d10e7502f78b2059c99250ff25b26a2fcb55b603399c3ddd",
+  "training_data_sha256": "159c912593aefacb8579f69444704f60aeeabe137a94dc679b15f9ea9033b5d9",
+  "training_projects": 15,
+  "external_soundings": 50,
+  "external_basins": 5,
+  "external_rows": 2229,
+  "excluded_intervals": 37,
+  "seed": 42,
+  "trees": 300,
+  "python": "3.12.14",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1"
+  },
+  "limitations": [
+    "Age-free companion, not original age-aware primary model",
+    "Source anonymization prevents independent project identification",
+    "Receiver interval support inferred from consecutive Vs depths; nominal 0.5 m first interval",
+    "Groundwater inferred from source hydrostatic pressure, not verified field water levels",
+    "Original field waveforms and timing picks not independently reprocessed",
+    "External results must not be used to select a preferred variant"
+  ]
+}

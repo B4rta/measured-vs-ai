@@ -1,0 +1,23 @@
+{
+  "fold": 4,
+  "deleted_training_project": "Bacso",
+  "test_projects": [
+    "Balazs Bela u",
+    "Galeria",
+    "River",
+    "T\u00f6m\u0151 u. 23"
+  ],
+  "base_weights": [
+    0.65,
+    0.35,
+    0.0
+  ],
+  "threshold": 350.0,
+  "cap": 0.5,
+  "inner_rmse": 57.85219361422413,
+  "specialist_weights": [
+    0.0,
+    0.0,
+    0.2
+  ]
+}

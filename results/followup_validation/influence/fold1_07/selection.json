@@ -1,0 +1,20 @@
+{
+  "fold": 1,
+  "deleted_training_project": "H6-H7",
+  "test_projects": [
+    "Puskas"
+  ],
+  "base_weights": [
+    0.75,
+    0.25,
+    0.0
+  ],
+  "threshold": 325.0,
+  "cap": 0.5,
+  "inner_rmse": 69.35408561987214,
+  "specialist_weights": [
+    0.1,
+    0.0,
+    0.2
+  ]
+}

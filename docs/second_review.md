@@ -1,5 +1,9 @@
 # Second review analyses
 
+The later [follow-up](followup_validation.md) completes fixed-test training
+deletions and controlled profile perturbations, and adds a qualified public-data
+test of an age-free companion. The scope below describes the preceding revision.
+
 The November 2026 revision preserves the September reference analysis and adds
 diagnostics requested during review. Equal-project mean RMSE is now the main
 interpretive endpoint. This prioritization is retrospective, not an a priori

@@ -1,0 +1,107 @@
+[
+  {
+    "fold": 1,
+    "test_projects": [
+      "Puskas"
+    ],
+    "base_weights": [
+      0.7,
+      0.0,
+      0.3
+    ],
+    "threshold": 325.0,
+    "cap": 0.5,
+    "inner_rmse": 62.484138270698836,
+    "specialist_weights": [
+      0.0,
+      0.0,
+      0.2
+    ]
+  },
+  {
+    "fold": 2,
+    "test_projects": [
+      "Bacso",
+      "Budapart",
+      "D\u00e9vai 14"
+    ],
+    "base_weights": [
+      0.2,
+      0.0,
+      0.8
+    ],
+    "threshold": 350.0,
+    "cap": 0.8,
+    "inner_rmse": 58.202083377059125,
+    "specialist_weights": [
+      0.45,
+      0.0,
+      0.8
+    ]
+  },
+  {
+    "fold": 3,
+    "test_projects": [
+      "Futo u",
+      "Lang",
+      "Marina"
+    ],
+    "base_weights": [
+      0.5,
+      0.4,
+      0.1
+    ],
+    "threshold": 375.0,
+    "cap": 0.5,
+    "inner_rmse": 57.632796972773555,
+    "specialist_weights": [
+      0.0,
+      0.0,
+      0.35
+    ]
+  },
+  {
+    "fold": 4,
+    "test_projects": [
+      "Balazs Bela u",
+      "Galeria",
+      "River",
+      "T\u00f6m\u0151 u. 23"
+    ],
+    "base_weights": [
+      0.45,
+      0.3,
+      0.25
+    ],
+    "threshold": 350.0,
+    "cap": 0.5,
+    "inner_rmse": 56.1291975379872,
+    "specialist_weights": [
+      0.0,
+      0.0,
+      0.4
+    ]
+  },
+  {
+    "fold": 5,
+    "test_projects": [
+      "Dunaterasz",
+      "H6-H7",
+      "Hungaria krt",
+      "Paskal"
+    ],
+    "base_weights": [
+      0.35,
+      0.65,
+      0.0
+    ],
+    "threshold": 325.0,
+    "cap": 0.65,
+    "inner_rmse": 65.88348683382239,
+    "specialist_weights": [
+      0.55,
+      0.0,
+      0.0
+    ]
+  }
+]

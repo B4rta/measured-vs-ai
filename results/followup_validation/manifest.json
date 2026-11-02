@@ -1,0 +1,21 @@
+{
+  "source_sha256": "159c912593aefacb8579f69444704f60aeeabe137a94dc679b15f9ea9033b5d9",
+  "seed": 42,
+  "trees": 300,
+  "outer_project_folds": 5,
+  "inner_project_folds": 3,
+  "fixed_test_training_deletion_refits": 60,
+  "python": "3.12.14",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1"
+  },
+  "limitations": [
+    "All local sensitivity analyses reuse the original 15 projects",
+    "Periodic omissions are simulations scored only at retained depths",
+    "Context resampling interpolates archived intervals, not original raw CPT logs",
+    "No variant replaces the reference model based on these results"
+  ]
+}
