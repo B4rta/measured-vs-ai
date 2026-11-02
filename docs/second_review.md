@@ -27,7 +27,7 @@ refits the complete workflow for 15 outer projects, giving mean-project/pooled
 RMSE 63.42/60.29 m/s. It changes the partition and training size; it is neither
 external validation nor a full fixed-test delete-one-training-project analysis.
 
-Fixed Mayne (2006), Hegazy and Mayne (1995), and Piratheepan and Andrus (2002)
+Fixed Robertson (2009), Mayne (2006), Hegazy and Mayne (1995), and Piratheepan and Andrus (2002)
 correlations are implemented as tabulated in Mahler et al., Table 4. Coefficients
 are not fitted here. They use subsets of the available CPT variables, with kPa
 and metre input conventions. The latter relationship's Holocene development
@@ -58,3 +58,5 @@ engineering validation have been added. Transfer to other settlements along
 the Danube is a hypothesis requiring local validation.
 
 Source: [Mahler et al. (2026)](https://doi.org/10.1007/s10706-026-03863-7).
+
+The Robertson (2009) net-cone-resistance equation is checked against the author's paper (doi:10.1139/T09-065), rather than substituting Qtn directly into the velocity equation. It uses Pa = 100 kPa, the reference CPT-only stress proxies and two-pass SBTn normalization starting with n = 1. No local coefficients are fitted. Its mean-project/pooled RMSE is 62.05/58.35 m/s, lower than the stack on both endpoints. This result precludes a claim of ensemble superiority over the established comparator.
