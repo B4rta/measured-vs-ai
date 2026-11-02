@@ -1,0 +1,12 @@
+{
+  "data_sha256": "159c912593aefacb8579f69444704f60aeeabe137a94dc679b15f9ea9033b5d9",
+  "seed": 42,
+  "trees": 300,
+  "python": "3.12.14",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1"
+  }
+}

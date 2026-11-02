@@ -1,0 +1,242 @@
+[
+  {
+    "fold": 1,
+    "base_weights": [
+      0.65,
+      0.3,
+      0.05
+    ],
+    "threshold": 325.0,
+    "cap": 0.5,
+    "inner_rmse": 62.331110729541486,
+    "specialist_weights": [
+      0.0,
+      0.0,
+      0.15
+    ]
+  },
+  {
+    "fold": 2,
+    "base_weights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "threshold": 350.0,
+    "cap": 0.5,
+    "inner_rmse": 59.98010423260096,
+    "specialist_weights": [
+      0.1,
+      0.0,
+      0.35
+    ]
+  },
+  {
+    "fold": 3,
+    "base_weights": [
+      0.45,
+      0.55,
+      0.0
+    ],
+    "threshold": 375.0,
+    "cap": 0.5,
+    "inner_rmse": 58.50147021676872,
+    "specialist_weights": [
+      0.0,
+      0.0,
+      0.3
+    ]
+  },
+  {
+    "fold": 4,
+    "base_weights": [
+      0.5,
+      0.5,
+      0.0
+    ],
+    "threshold": 350.0,
+    "cap": 0.5,
+    "inner_rmse": 60.51850920201534,
+    "specialist_weights": [
+      0.0,
+      0.0,
+      0.4
+    ]
+  },
+  {
+    "fold": 5,
+    "base_weights": [
+      0.45,
+      0.55,
+      0.0
+    ],
+    "threshold": 350.0,
+    "cap": 0.5,
+    "inner_rmse": 66.54655788827347,
+    "specialist_weights": [
+      0.1,
+      0.0,
+      0.2
+    ]
+  },
+  {
+    "fold": 6,
+    "base_weights": [
+      0.7,
+      0.3,
+      0.0
+    ],
+    "threshold": 350.0,
+    "cap": 0.65,
+    "inner_rmse": 62.059086890427245,
+    "specialist_weights": [
+      0.1,
+      0.0,
+      0.6
+    ]
+  },
+  {
+    "fold": 7,
+    "base_weights": [
+      0.5,
+      0.5,
+      0.0
+    ],
+    "threshold": 350.0,
+    "cap": 0.5,
+    "inner_rmse": 63.17857124242986,
+    "specialist_weights": [
+      0.0,
+      0.0,
+      0.5
+    ]
+  },
+  {
+    "fold": 8,
+    "base_weights": [
+      0.6,
+      0.35,
+      0.05
+    ],
+    "threshold": 350.0,
+    "cap": 0.5,
+    "inner_rmse": 61.51863069276793,
+    "specialist_weights": [
+      0.0,
+      0.0,
+      0.35
+    ]
+  },
+  {
+    "fold": 9,
+    "base_weights": [
+      0.6,
+      0.4,
+      0.0
+    ],
+    "threshold": 375.0,
+    "cap": 0.5,
+    "inner_rmse": 57.23124858788314,
+    "specialist_weights": [
+      0.0,
+      0.0,
+      0.4
+    ]
+  },
+  {
+    "fold": 10,
+    "base_weights": [
+      0.55,
+      0.45,
+      0.0
+    ],
+    "threshold": 375.0,
+    "cap": 0.5,
+    "inner_rmse": 62.16981400469391,
+    "specialist_weights": [
+      0.1,
+      0.0,
+      0.45
+    ]
+  },
+  {
+    "fold": 11,
+    "base_weights": [
+      0.55,
+      0.45,
+      0.0
+    ],
+    "threshold": 350.0,
+    "cap": 0.5,
+    "inner_rmse": 60.47264754594108,
+    "specialist_weights": [
+      0.05,
+      0.0,
+      0.5
+    ]
+  },
+  {
+    "fold": 12,
+    "base_weights": [
+      0.5,
+      0.4,
+      0.1
+    ],
+    "threshold": 350.0,
+    "cap": 0.5,
+    "inner_rmse": 60.93482905623314,
+    "specialist_weights": [
+      0.05,
+      0.0,
+      0.45
+    ]
+  },
+  {
+    "fold": 13,
+    "base_weights": [
+      0.5,
+      0.45,
+      0.05
+    ],
+    "threshold": 350.0,
+    "cap": 0.5,
+    "inner_rmse": 60.72059144172955,
+    "specialist_weights": [
+      0.05,
+      0.0,
+      0.5
+    ]
+  },
+  {
+    "fold": 14,
+    "base_weights": [
+      0.6,
+      0.4,
+      0.0
+    ],
+    "threshold": 350.0,
+    "cap": 0.5,
+    "inner_rmse": 60.50491597837216,
+    "specialist_weights": [
+      0.05,
+      0.0,
+      0.45
+    ]
+  },
+  {
+    "fold": 15,
+    "base_weights": [
+      0.8,
+      0.2,
+      0.0
+    ],
+    "threshold": 350.0,
+    "cap": 0.65,
+    "inner_rmse": 61.125020469492284,
+    "specialist_weights": [
+      0.1,
+      0.0,
+      0.65
+    ]
+  }
+]

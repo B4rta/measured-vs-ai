@@ -4,6 +4,10 @@ Code and data for a project-level study of shear-wave velocity prediction from c
 
 The September 2026 revision replaces the original pooled stacking scores with nested validation, checks the source workbook, and evaluates prediction intervals on separate projects. The primary configuration uses CPT variables, groundwater information and geological age. It excludes the seismic measurement label and SCPT routing.
 
+## November 2026 review
+
+Additional stress, profile-window, component and leave-one-project-out checks, fixed published empirical comparators, routing diagnostics and descriptive coverage bounds are documented in [the second-review notes](docs/second_review.md). Run `python scripts/review_round2.py` and `python scripts/empirical_benchmarks.py`; outputs are in `results/review_round2/`. These analyses reuse the same projects and do not supply external validation. The September reference results below are unchanged.
+
 ## Results
 
 Five outer project folds, three inner project folds, seed 42:

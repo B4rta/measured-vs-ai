@@ -1,0 +1,82 @@
+[
+  {
+    "fold": 1,
+    "base_weights": [
+      0.65,
+      0.35,
+      0.0
+    ],
+    "threshold": 325.0,
+    "cap": 0.5,
+    "inner_rmse": 62.12118069853446,
+    "specialist_weights": [
+      0.0,
+      0.0,
+      0.2
+    ]
+  },
+  {
+    "fold": 2,
+    "base_weights": [
+      0.15,
+      0.0,
+      0.85
+    ],
+    "threshold": 350.0,
+    "cap": 0.8,
+    "inner_rmse": 57.80875224470661,
+    "specialist_weights": [
+      0.55,
+      0.0,
+      0.8
+    ]
+  },
+  {
+    "fold": 3,
+    "base_weights": [
+      0.5,
+      0.4,
+      0.1
+    ],
+    "threshold": 350.0,
+    "cap": 0.5,
+    "inner_rmse": 57.956034341538,
+    "specialist_weights": [
+      0.0,
+      0.0,
+      0.25
+    ]
+  },
+  {
+    "fold": 4,
+    "base_weights": [
+      0.5,
+      0.2,
+      0.3
+    ],
+    "threshold": 350.0,
+    "cap": 0.5,
+    "inner_rmse": 56.38299577223689,
+    "specialist_weights": [
+      0.0,
+      0.0,
+      0.4
+    ]
+  },
+  {
+    "fold": 5,
+    "base_weights": [
+      0.4,
+      0.5,
+      0.1
+    ],
+    "threshold": 325.0,
+    "cap": 0.5,
+    "inner_rmse": 67.2108568776498,
+    "specialist_weights": [
+      0.3,
+      0.0,
+      0.0
+    ]
+  }
+]
