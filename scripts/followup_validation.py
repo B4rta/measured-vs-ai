@@ -4,7 +4,7 @@ These are additional sensitivity analyses on existing Budapest projects.
 They do not create independent sites or recover raw CPT measurements.
 """
 from pathlib import Path
-import sys,json
+import sys,json,argparse
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import GroupKFold
@@ -13,6 +13,7 @@ sys.path[:0]=[str(ROOT),str(ROOT/'src'),str(ROOT/'scripts')]
 import run_nested_validation as nv
 from measured_vs.data.stress import rebuild_stress
 from measured_vs.data.features import engineer_profile_features
+from measured_vs.utils.cache import analysis_signature, protect_cache
 from review_round2 import scores
 
 OUT=ROOT/'results/followup_validation'
@@ -65,7 +66,16 @@ def resampled_context(raw, spacing):
     return original
 
 def main():
-    OUT.mkdir(parents=True,exist_ok=True)
+    global OUT
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output',type=Path,default=OUT)
+    args=parser.parse_args()
+    OUT=args.output.resolve()
+    protect_cache(OUT, analysis_signature(ROOT, {
+        'training_table': ROOT/'data/cleaned/cpt_vs_labeled.csv',
+        'reference_predictions': ROOT/'results/revised_stress/deployable_42/outer_predictions.csv'},
+        ['run_nested_validation.py', 'scripts/review_round2.py', 'scripts/followup_validation.py'],
+        {'seed':42,'trees':300}))
     raw=rebuild_stress(pd.read_csv(ROOT/'data/cleaned/cpt_vs_labeled.csv'))
     raw['row_id']=np.arange(len(raw))
     d=engineer_profile_features(raw)

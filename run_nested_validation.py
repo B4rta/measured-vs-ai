@@ -21,6 +21,7 @@ from measured_vs.data.stress import rebuild_stress
 from measured_vs.models.baseline import EmpiricalBaselineModel
 from measured_vs.models.trees import TreeProfileModel
 from measured_vs.evaluation.metrics import regression_metrics_vs
+from measured_vs.utils.cache import analysis_signature, protect_cache
 
 THRESHOLDS = (325., 350., 375.)
 CAPS = (.50, .65, .80)
@@ -139,6 +140,8 @@ def main():
     out = root/args.output
     out.mkdir(parents=True, exist_ok=True)
     source = root/"data/cleaned/cpt_vs_labeled.csv"
+    protect_cache(out, analysis_signature(root, {'training_table': source},
+                  ['run_nested_validation.py'], {'trees': args.trees}))
     raw = rebuild_stress(pd.read_csv(source))
     if not np.isfinite(raw.vs_meas_mps).all() or not raw.vs_meas_mps.gt(0).all():
         raise ValueError("Targets must be finite and positive")
@@ -148,7 +151,8 @@ def main():
         audit.append(dict(column=c, missing=int(raw[c].isna().sum()), missing_pct=100*raw[c].isna().mean(), nonpositive=int((raw[c]<=0).sum()) if pd.api.types.is_numeric_dtype(raw[c]) else None))
     pd.DataFrame(audit).to_csv(out/"data_audit.csv", index=False)
     metadata = dict(arguments=vars(args), data_sha256=hashlib.sha256(source.read_bytes()).hexdigest(), python=platform.python_version(), packages={p:importlib.metadata.version(p) for p in ["numpy", "pandas", "scikit-learn", "scipy"]}, rows=len(raw), projects=raw.group_project.nunique(), soundings=raw.group_cpt.nunique(), duplicate_rows=int(raw.drop(columns="row_id").duplicated().sum()), removed_rows=0)
-    (out/"run_manifest.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
+    if not (out/"run_manifest.json").exists():
+        (out/"run_manifest.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
     for mode in args.modalities:
         modality = mode == "retrospective"
         # Keep original modality for subgroup reports; exclude it explicitly from X.
@@ -157,6 +161,10 @@ def main():
             path = out/f"{mode}_{seed}"
             path.mkdir(exist_ok=True)
             if (path/"complete.json").exists():
+                required = ['outer_predictions.csv', 'selection.json', 'pooled_metrics.csv',
+                            'project_metrics.csv', 'fold_metrics.csv', 'inner_sensitivity.csv']
+                if not all((path/name).exists() for name in required):
+                    raise ValueError(f'Incomplete archived run: {path}; use --output with a new directory')
                 continue
             oof = data[["row_id", "project", "group_project", "group_cpt", "geo_age", "test_method", "z_mid_m", "vs_meas_mps"]].copy()
             selections, grids, folds = [], [], []

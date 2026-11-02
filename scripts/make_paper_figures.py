@@ -1,3 +1,4 @@
+"""Plot historical exploratory runs; revised figures use summarize_revision.py."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -102,7 +103,7 @@ def depth_profile(df: pd.DataFrame, out_dir: Path, cpt_id: str | None):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Create manuscript figures from a finished run.")
+    parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run-dir", required=True)
     parser.add_argument("--out-dir", default=None)
     parser.add_argument("--cpt-id", default=None, help="Optional group_cpt identifier for depth-profile figure.")

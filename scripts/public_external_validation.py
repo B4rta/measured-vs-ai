@@ -18,6 +18,7 @@ sys.path[:0]=[str(ROOT),str(ROOT/'src'),str(ROOT/'scripts')]
 import run_nested_validation as nv
 from measured_vs.data.stress import rebuild_stress
 from measured_vs.data.features import engineer_profile_features
+from measured_vs.utils.cache import analysis_signature, protect_cache
 from review_round2 import scores
 
 def prepare(archive):
@@ -67,8 +68,15 @@ def external_metrics(p):
     return pd.DataFrame(rows)
 
 def main():
-    ap=argparse.ArgumentParser();ap.add_argument('source_zip',type=Path);args=ap.parse_args()
-    out=ROOT/'results/public_external';out.mkdir(exist_ok=True)
+    ap=argparse.ArgumentParser(description=__doc__)
+    ap.add_argument('source_zip',type=Path)
+    ap.add_argument('--output',type=Path,default=ROOT/'results/public_external')
+    args=ap.parse_args()
+    out=args.output.resolve()
+    protect_cache(out, analysis_signature(ROOT, {
+        'training_table': ROOT/'data/cleaned/cpt_vs_labeled.csv', 'source_zip': args.source_zip},
+        ['run_nested_validation.py', 'scripts/review_round2.py', 'scripts/public_external_validation.py'],
+        {'seed':42,'trees':300}))
     ext,flags=prepare(args.source_zip)
     ext.to_csv(out/'austrian_interval_table.csv',index=False)
     flags.to_csv(out/'source_flags.csv',index=False)
@@ -79,7 +87,8 @@ def main():
     ext=rebuild_stress(ext)
     ext['row_id']=np.arange(len(ext))
     valid=engineer_profile_features(ext)
-    if not (out/'budapest_age_free_metrics.csv').exists():
+    if not all((out/name).exists() for name in ['budapest_age_free_metrics.csv',
+            'budapest_age_free_predictions.csv', 'budapest_age_free_selections.json']):
         p=train[['row_id','group_project','group_cpt','vs_meas_mps']].copy()
         selections=[]
         for fold,(a,b) in enumerate(GroupKFold(5).split(train,groups=train.group_project),1):
@@ -90,7 +99,7 @@ def main():
         p.to_csv(out/'budapest_age_free_predictions.csv',index=False)
         pd.DataFrame(scores(p,list(pred))).to_csv(out/'budapest_age_free_metrics.csv',index=False)
         (out/'budapest_age_free_selections.json').write_text(json.dumps(selections,indent=2))
-    if not (out/'external_predictions.csv').exists():
+    if not all((out/name).exists() for name in ['external_predictions.csv','frozen_selection.json']):
         print('Frozen fit on all 15 Budapest projects; external targets unused',flush=True)
         pred,chosen,grid=nv.fit_predict(train,valid,42,False,300)
         p=valid[['row_id','group_project','group_cpt','z_mid_m','vs_meas_mps']].copy()

@@ -126,8 +126,12 @@ python -m unittest discover -s tests -v
 ```
 
 Outputs: `results/followup_validation/` and `results/public_external/`. Scripts
-resume from prediction caches; use a fresh output tree after changing inputs,
-code or environment. Manifests, predictions, selections, per-sounding errors,
+check input digests, analysis code, parameters and the modelling environment
+before reusing prediction caches. A mismatch stops the run; use `--output`
+with a new directory to refit a changed analysis. The saved cache signatures
+were registered after the repository audit of the existing predictions.
+`audit_followup.py` audits the archived default output directories.
+Manifests, predictions, selections, per-sounding errors,
 velocity subsets and range flags are retained. Raw archives are separate.
 External derived tables adapt Oberhollenzer S, Premstaller M, Marte R,
 Tschuchnigg F, Erharter GH, Marcher T, *Cone penetration test dataset Premstaller

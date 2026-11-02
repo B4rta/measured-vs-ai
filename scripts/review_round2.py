@@ -4,7 +4,7 @@ Run from any directory. All refits use the original seed, tree count and
 inner selection; scenarios are sensitivity checks, not model selection.
 """
 from pathlib import Path
-import sys, json, hashlib, platform, importlib.metadata
+import sys, json, hashlib, platform, importlib.metadata, argparse
 import numpy as np
 import pandas as pd
 from scipy.stats import beta
@@ -15,9 +15,9 @@ sys.path[:0] = [str(ROOT), str(ROOT / 'src')]
 import run_nested_validation as nv
 from measured_vs.data.features import engineer_profile_features
 from measured_vs.data.stress import rebuild_stress
+from measured_vs.utils.cache import analysis_signature, protect_cache
 
 OUT = ROOT / 'results/review_round2'
-OUT.mkdir(parents=True, exist_ok=True)
 
 def stress_variant(raw, mode):
     d = rebuild_stress(raw)
@@ -105,11 +105,11 @@ def refit(raw, name, lopo=False):
     if (target/'metrics.csv').exists():return
     target.mkdir(exist_ok=True)
     d=stress_variant(raw,name)
+    d['row_id']=np.arange(len(d))
     windows={'window_1':(1,), 'window_5_7':(5,7)}.get(name,(3,5))
     d=engineer_profile_features(d,profile_windows=windows)
     if name=='no_profile':
         d=d.drop(columns=[c for c in d if any(t in c for t in ['_roll','_diff1','_local_resid']) or c in ['depth_rank_pct','z_rel_minmax']])
-    d['row_id']=np.arange(len(d))
     oof=d[['row_id','group_project','group_cpt','geo_age','vs_meas_mps']].copy()
     selections=[]
     for fold,(a,b) in enumerate(GroupKFold(15 if lopo else 5).split(d,groups=d.group_project),1):
@@ -123,6 +123,16 @@ def refit(raw, name, lopo=False):
     pd.DataFrame(scores(oof,list(pred))).to_csv(target/'metrics.csv',index=False)
 
 def main():
+    global OUT
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, default=OUT)
+    args = parser.parse_args()
+    OUT = args.output.resolve()
+    protect_cache(OUT, analysis_signature(ROOT, {
+        'training_table': ROOT/'data/cleaned/cpt_vs_labeled.csv',
+        'reference_predictions': ROOT/'results/revised_stress/deployable_42/outer_predictions.csv',
+        'reference_selection': ROOT/'results/revised_stress/deployable_42/selection.json'},
+        ['run_nested_validation.py', 'scripts/review_round2.py'], {'seed': 42, 'trees': 300}))
     raw=pd.read_csv(ROOT/'data/cleaned/cpt_vs_labeled.csv')
     diagnostics(raw)
     for name in ['linear_depth','unsat_0','unsat_2','integrated_proxy','window_1','window_5_7','no_profile','leave_one_project_out']:

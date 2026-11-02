@@ -1,5 +1,10 @@
 # Second review analyses
 
+The repository audit on 2 November corrected the `row_id` field in the eight
+scenario prediction tables to retain source-table IDs before profile sorting.
+Previously those tables numbered the sorted records. Targets, predictions,
+project allocations and all numerical results are unchanged.
+
 The later [follow-up](followup_validation.md) completes fixed-test training
 deletions and controlled profile perturbations, and adds a qualified public-data
 test of an age-free companion. The scope below describes the preceding revision.

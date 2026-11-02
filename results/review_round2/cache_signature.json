@@ -1,0 +1,37 @@
+{
+  "code": {
+    "run_nested_validation.py": "3444f8ce4344efa9f8b2a7d6b27d78ab91f264be0f1445e3f95770a97653960a",
+    "scripts/review_round2.py": "016d032d8c07fe6cafcd04ad415af41c3020347f68de4aeefa2050c2c87e9ea6",
+    "src/measured_vs/__init__.py": "75ad4f4c2943325f88064ad2beae890b59674be2bf0404b30afc5584dc4de4bb",
+    "src/measured_vs/data/features.py": "9eb95069732896963815eba8f523e10dfed23b41e6336bcb9947375eaab87f10",
+    "src/measured_vs/data/io.py": "91838d3f0d8485bb26bd9c093b1df04716103615c0f1f582c016fc94c0661a6d",
+    "src/measured_vs/data/stress.py": "16e85aabde0d067be03727fe746ab892324474531f1d2de7c97dd1b2f0324345",
+    "src/measured_vs/evaluation/conformal.py": "90b8edb95f8e4ec720557fe65bcb9baac94da4a750c8661b243d788841a5c902",
+    "src/measured_vs/evaluation/metrics.py": "a146ac6dc776b8e8b697230f04d2b53ef5159674eb78b8c274f3d808259992b1",
+    "src/measured_vs/evaluation/project_conformal.py": "4a6660a3091f4ea5138a6259fcd869c34efa48e15306c7c070cfdfce06184418",
+    "src/measured_vs/models/baseline.py": "43148ddceda11ecc881eadff8c45d1a8e5ad3cd3d71a92c771c92c624429e357",
+    "src/measured_vs/models/specialist_stack.py": "5bdadb6acf3158b3e675951ef55e8a099da5e94abdd1f0e92aa6561d370a658b",
+    "src/measured_vs/models/stack.py": "c370b4973ec84e732348c28c674183267027e9587e4209fa1aba7a64a7de2129",
+    "src/measured_vs/models/trees.py": "f26c621114c2d1aeb1908db70351aa7d5017cef25201f2a9d62b05c6e8d0911f",
+    "src/measured_vs/training/inference.py": "146a0736a3e7080cf7b303b1c285afc5c7e688bb54c64b399caf4925ea682a00",
+    "src/measured_vs/training/pipeline.py": "747845a2a8c654961a827e5755b3555f5dc59e97bb2dc1a1a96b33bc939a199c",
+    "src/measured_vs/utils/cache.py": "422ce0fdc915527d78dea1071be39a8f04987a820dce4ec9e0ada3f8e7a44f9d",
+    "src/measured_vs/utils/config.py": "1ab064398723ea123ed0be4c1d5a1addd7462447232d09c548f7f906748c2d09"
+  },
+  "inputs": {
+    "reference_predictions": "e765a6fc22508b40c07676219f9c13d7081c7d29e2ac8c21c839ee5f63c6b987",
+    "reference_selection": "081658657a8139cc9099b484e198ee08fba62c2fa639f9f7efb0d78945ca18fd",
+    "training_table": "159c912593aefacb8579f69444704f60aeeabe137a94dc679b15f9ea9033b5d9"
+  },
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1"
+  },
+  "parameters": {
+    "seed": 42,
+    "trees": 300
+  },
+  "python": "3.12.14"
+}

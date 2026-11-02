@@ -1,0 +1,46 @@
+{
+  "scope": "File integrity, stored prediction metrics, row identities and project allocations; no model refitting",
+  "inventory": {
+    "files": 594,
+    "extensions": {
+      "(none)": 4,
+      ".csv": 267,
+      ".joblib": 60,
+      ".jpg": 1,
+      ".json": 137,
+      ".md": 9,
+      ".parquet": 2,
+      ".png": 20,
+      ".py": 40,
+      ".svg": 15,
+      ".toml": 1,
+      ".txt": 13,
+      ".yaml": 25
+    },
+    "serialized_models": "LFS payloads present; historical joblib files are not unpickled or certified as revised models"
+  },
+  "local_validation": {
+    "reference_runs": 6,
+    "second_review_scenarios": 8,
+    "empirical_comparators": 4
+  },
+  "followup": {
+    "deletion_refits": 60,
+    "profile_scenarios": 5
+  },
+  "intervals": {
+    "test_projects": 15,
+    "whole_projects_covered": {
+      "80": 12,
+      "90": 15
+    }
+  },
+  "external": {
+    "intervals": 2229,
+    "soundings": 50,
+    "basins": 5,
+    "excluded_intervals": 37
+  },
+  "current_cache_signatures": 4,
+  "status": "passed"
+}

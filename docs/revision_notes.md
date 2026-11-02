@@ -1,5 +1,11 @@
 # September 2026 analysis revision
 
+These notes describe the September reference analysis. The November additions
+are in [second_review.md](second_review.md) and
+[followup_validation.md](followup_validation.md). The code digests in
+`results/revision_summary/code_sha256.json` record the September source snapshot;
+they are not checksums of the current checkout.
+
 ## Evaluation
 
 Five outer project folds contain three inner project folds. Inner predictions select base weights (0.05 grid), specialist weights (0.05 grid), thresholds (325, 350, 375 m/s) and caps (0.50, 0.65, 0.80). Numerical ties prefer a smaller cap and then a smaller correction. Each tree has 300 estimators, fixed before the revised runs; this is not an exact rerun of the historical 500/700-tree model. Global RF/ET minimum leaves are 2, and tertiary/SCPT/high-Vs specialist minimum leaves are 2/1/1. Minimum specialist sizes are 60/40/80. The primary setting excludes modality predictors, the SCPT specialist and its sample-weight boost.

@@ -6,16 +6,30 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
 from measured_vs.data.stress import rebuild_stress
+from measured_vs.utils.cache import analysis_signature, protect_cache
 
 
 def main():
     out = ROOT / 'results/followup_validation'
+    source = ROOT / 'data/cleaned/cpt_vs_labeled.csv'
+    protect_cache(out, analysis_signature(ROOT, {
+        'training_table': source,
+        'reference_predictions': ROOT/'results/revised_stress/deployable_42/outer_predictions.csv'},
+        ['run_nested_validation.py', 'scripts/review_round2.py', 'scripts/followup_validation.py'],
+        {'seed':42,'trees':300}))
+    public = ROOT / 'results/public_external'
+    public_manifest = json.loads((public/'manifest.json').read_text(encoding='utf8'))
+    signature = analysis_signature(ROOT, {'training_table': source},
+        ['run_nested_validation.py', 'scripts/review_round2.py', 'scripts/public_external_validation.py'],
+        {'seed':42,'trees':300})
+    # Auditing saved predictions needs the recorded archive digest, not the raw download.
+    signature['inputs']['source_zip'] = public_manifest['source_sha256']
+    protect_cache(public, signature)
     rows = []
     for path in sorted(out.glob('*/metrics.csv')):
         for row in pd.read_csv(path).to_dict('records'):
             rows.append(dict(scenario=path.parent.name, **row))
     pd.DataFrame(rows).to_csv(out / 'profile_scenario_summary.csv', index=False)
-    source = ROOT / 'data/cleaned/cpt_vs_labeled.csv'
     manifest = dict(
         source_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),
         seed=42, trees=300, outer_project_folds=5, inner_project_folds=3,
@@ -30,7 +44,6 @@ def main():
         ],
     )
     (out / 'manifest.json').write_text(json.dumps(manifest, indent=2), encoding='utf8')
-    public = ROOT / 'results/public_external'
     train = rebuild_stress(pd.read_csv(source))
     ext = rebuild_stress(pd.read_csv(public / 'austrian_interval_table.csv'))
     ext['row_id'] = range(len(ext))

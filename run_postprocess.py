@@ -1,3 +1,4 @@
+"""Historical calibration-set interval summaries; revised assessment uses run_project_intervals.py."""
 from pathlib import Path
 import sys
 
@@ -49,7 +50,7 @@ def resolve_run_dir(run_dir_arg: str | None) -> Path:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Add conformal prediction intervals to a finished training run.")
+    parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--run-dir",
         default=None,

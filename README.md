@@ -47,7 +47,18 @@ python run_project_intervals.py
 python scripts/summarize_revision.py
 ```
 
-Results go to `results/revised_stress/`, `results/revised_intervals/` and `results/revision_summary/`. The optional source audit requires a local copy supplied by the database owner:
+Results go to `results/revised_stress/`, `results/revised_intervals/` and `results/revision_summary/`.
+
+Prediction caches are checked against input and code digests, tree count and
+the modelling environment before reuse. A changed analysis requires a fresh
+directory, for example `python run_nested_validation.py --output results/new_run`.
+The tracked signatures were registered after auditing the archived predictions;
+they are safeguards for subsequent runs, not original fit-time records.
+Run `python scripts/audit_repository.py` to verify repository files, saved
+prediction scores, row identities and project allocations without refitting.
+The [audit checklist](docs/repository_audit.md) records its scope and corrections.
+
+The optional source audit requires a local copy supplied by the database owner:
 
 ```bash
 python scripts/audit_source_workbook.py "/path/to/Data Table (Full FINAL).xlsx"

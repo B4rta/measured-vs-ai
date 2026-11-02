@@ -4,18 +4,13 @@ from pathlib import Path
 import argparse
 
 import pandas as pd
+from sklearn.model_selection import GroupKFold
 
 
 def greedy_group_kfold(groups: pd.Series, n_splits: int) -> list[list[str]]:
-    """Mirror the unshuffled GroupKFold size-balancing logic for audit tables."""
-    sizes = groups.astype(str).value_counts(sort=True)
-    fold_sizes = [0] * n_splits
-    fold_groups: list[list[str]] = [[] for _ in range(n_splits)]
-    for group, size in sizes.items():
-        fold_idx = min(range(n_splits), key=lambda i: fold_sizes[i])
-        fold_groups[fold_idx].append(str(group))
-        fold_sizes[fold_idx] += int(size)
-    return fold_groups
+    """Use the same splitter, including tie handling, as the validation runner."""
+    return [sorted(groups.iloc[test].astype(str).unique()) for _, test in
+            GroupKFold(n_splits).split(groups, groups=groups)]
 
 
 def summarize_projects(df: pd.DataFrame) -> pd.DataFrame:
@@ -84,7 +79,7 @@ def hierarchy(df: pd.DataFrame) -> pd.DataFrame:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Write dataset hierarchy and grouped-CV audit tables.")
     parser.add_argument("--input", default="data/cleaned/cpt_vs_labeled.csv")
-    parser.add_argument("--out-dir", default="docs/results_snapshot")
+    parser.add_argument("--out-dir", default="results/validation_design")
     parser.add_argument("--splits", type=int, nargs="+", default=[5, 15])
     args = parser.parse_args()
 

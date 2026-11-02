@@ -3,6 +3,7 @@ __pycache__/
 .ipynb_checkpoints/
 outputs/*
 !outputs/.gitkeep
+!outputs/README.md
 outputs.zip
 paper_figures/
 *.tmp

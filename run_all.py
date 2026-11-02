@@ -1,3 +1,4 @@
+"""Run the historical exploratory workflow; see run_nested_validation.py for the revision."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -6,14 +7,7 @@ import subprocess
 import sys
 import time
 
-# -----------------------------------------------------------------------------
-# VS Code friendly defaults
-# -----------------------------------------------------------------------------
-# You can simply press Run on this file in VS Code.
-# For the full paper pipeline keep DEFAULT_CONFIG as configs/default.yaml.
-# For a quick test change it to configs/smoke.yaml, or run from terminal:
-#   python run_all.py --config configs/smoke.yaml --skip-shap --skip-benchmark --skip-sensitivity
-# -----------------------------------------------------------------------------
+# Defaults for reproducing the exploratory runs retained in outputs/.
 DEFAULT_CONFIG = "configs/default.yaml"
 RUN_TRAINING = True
 RUN_CONFORMAL_POSTPROCESS = True
@@ -87,7 +81,7 @@ def find_latest_run_dir(outputs_dir: Path) -> Path:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Run the complete CPT-Vs paper pipeline from one VS Code friendly file.")
+    parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", default=DEFAULT_CONFIG, help="Training config path.")
     parser.add_argument("--run-dir", default=None, help="Use an existing run directory and skip training unless --force-train is given.")
     parser.add_argument("--force-train", action="store_true", help="Train even if --run-dir is provided.")

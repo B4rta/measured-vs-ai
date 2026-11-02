@@ -31,6 +31,14 @@ class RevisionTests(unittest.TestCase):
     def test_project_overlap_rejected(self):
         with self.assertRaises(ValueError): assert_disjoint(self.data,self.data.iloc[:1])
 
+    def test_source_row_ids_survive_profile_sorting(self):
+        raw=pd.read_csv(ROOT/'data/cleaned/cpt_vs_labeled.csv')
+        raw['row_id']=np.arange(len(raw))
+        sorted_data=engineer_profile_features(rebuild_stress(raw))
+        original=raw.set_index('row_id').loc[sorted_data.row_id]
+        np.testing.assert_array_equal(sorted_data.group_cpt, original.group_cpt)
+        np.testing.assert_allclose(sorted_data.vs_meas_mps, original.vs_meas_mps)
+
     def test_heldout_targets_and_modality_cannot_change_deployable_predictions(self):
         x=self.data
         held=x.group_project.eq("Hungaria krt")

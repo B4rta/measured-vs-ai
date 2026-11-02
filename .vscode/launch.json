@@ -2,16 +2,16 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Run full paper pipeline",
-      "type": "python",
+      "name": "Revised nested project validation",
+      "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/run_all.py",
+      "program": "${workspaceFolder}/run_nested_validation.py",
       "console": "integratedTerminal",
       "cwd": "${workspaceFolder}"
     },
     {
-      "name": "Run smoke pipeline quickly",
-      "type": "python",
+      "name": "Legacy exploratory smoke run",
+      "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/run_all.py",
       "console": "integratedTerminal",
@@ -24,8 +24,8 @@
       ]
     },
     {
-      "name": "Train only",
-      "type": "python",
+      "name": "Legacy exploratory training",
+      "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/run_train.py",
       "console": "integratedTerminal",
